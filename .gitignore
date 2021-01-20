@@ -1,7 +1,7 @@
 # NativeScript
-hooks/
-node_modules/
-platforms/
+mobileapp/hooks/
+mobileapp/node_modules/
+mobileapp/platforms/
 
 # NativeScript Template
 *.js.map
@@ -10,11 +10,11 @@ platforms/
 !webpack.config.js
 
 # Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+mobileapp/logs
+mobileapp/*.log
+mobileapp/npm-debug.log*
+mobileapp/yarn-debug.log*
+mobileapp/yarn-error.log*
 
 # General
 .DS_Store
