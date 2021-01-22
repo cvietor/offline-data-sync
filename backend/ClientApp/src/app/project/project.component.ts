@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from "rxjs/operators";
+import { UserService } from '../user.service';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -16,6 +17,7 @@ export class ProjectComponent implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
+    private userService: UserService,
     @Inject('BASE_URL') private baseUrl: string) {}
 
   ngOnInit() {
@@ -41,7 +43,8 @@ export class ProjectComponent implements OnInit {
     const flightNr = prompt("Enter flight nr");
 
     const flight = {
-      flightNr: flightNr
+      flightNr: flightNr,
+      userId: this.userService.getSelectedUser().id
     };
 
     const flights = [...this.project.flights || [], flight];

@@ -11,15 +11,16 @@ export class NavMenuComponent {
   selectedUser = null;
 
   users = [{
-    id: 1,
+    id: "1",
     name: "Chris Vietor"
   },{
-    id: 2,
+    id: "2",
     name: "Kai Gerken"
   }];
 
   constructor(private userService: UserService) {
     this.selectedUser = this.userService.getSelectedUser() || this.users[0];
+    this.selectUser(this.selectedUser);
   }
 
   collapse() {

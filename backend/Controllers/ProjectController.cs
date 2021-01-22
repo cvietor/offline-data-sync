@@ -17,7 +17,7 @@ namespace backend.Controllers
     public class ProjectController : ControllerBase
     {
         private const string BaseUrl = "https://offline-data-sync-db-default-rtdb.europe-west1.firebasedatabase.app/";
-        
+
         private readonly ILogger<ProjectController> _logger;
 
         public ProjectController(ILogger<ProjectController> logger)
@@ -34,10 +34,12 @@ namespace backend.Controllers
                 .Child("Projects")
                 .OnceAsync<Project>();
 
-            return (result.Select(item => {
-                item.Object.Id = item.Key;
-                return item.Object;
-            })).ToList();
+            return (result
+                .Select(item =>
+                {
+                    item.Object.Id = item.Key;
+                    return item.Object;
+                })).ToList();
         }
 
         [HttpGet("{id}")]
@@ -57,7 +59,7 @@ namespace backend.Controllers
         public async Task<ActionResult<string>> Post(Project project)
         {
             var firebaseClient = new FirebaseClient(BaseUrl);
-            
+
             var result = await firebaseClient
                 .Child("Projects")
                 .PostAsync<Project>(project);
@@ -80,7 +82,7 @@ namespace backend.Controllers
         public async Task Delete(string key)
         {
             var firebaseClient = new FirebaseClient(BaseUrl);
-            
+
             await firebaseClient
                 .Child("Projects")
                 .Child(key)
