@@ -1,6 +1,20 @@
 <ActionBar title="My App">
+    <Button *ngIf="selectedUser" [text]="selectedUser.name" (tap)="switchUser()"></Button>
 </ActionBar>
 
 <StackLayout>
-    <Label text="Projects"></Label>
+    <Button text="ADd project" (tap)="openAddModal()"></Button>
+    <Button text="refresh" (tap)="getProjects()"></Button>
+
+    <StackLayout>
+        <ListView height="650" [items]="projects">
+            <ng-template let-project="item" let-i="index" let-odd="odd" let-even="even">
+                <GridLayout columns="6*, 1*, 1*">
+                    <Label col="0" [text]="project.name"></Label>
+                    <Button col="1" text="Edit" (tap)="editProject(project)"></Button>
+                    <Button col="2" text="Delete" (tap)="delete(project)"></Button>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+    </StackLayout>
 </StackLayout>

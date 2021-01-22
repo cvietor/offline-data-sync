@@ -1,0 +1,28 @@
+<ActionBar title="My App"> </ActionBar>
+
+<StackLayout *ngIf="project">
+  <StackLayout orientation="horizontal">
+    <Label text="Name"></Label>
+    <TextField [(ngModel)]="project.name"> </TextField>
+  </StackLayout>
+
+  <StackLayout orientation="horizontal">
+    <Label text="Description"></Label>
+    <TextField [(ngModel)]="project.description"> </TextField>
+  </StackLayout>
+
+  <Button text="Save" (tap)="updateProject(project)"></Button>
+
+  <StackLayout>
+    <Button text="Add flight" (tap)="addFlight()"></Button>
+
+    <ListView height="650" [items]="project.flights">
+        <ng-template let-flight="item" let-i="index" let-odd="odd" let-even="even">
+            <GridLayout columns="6*, 1*, 1*">
+                <Label col="0" [text]="flight.flightNr"></Label>
+                <Button col="2" text="Delete" (tap)="deleteFlight(flight)"></Button>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+  </StackLayout>
+</StackLayout>
