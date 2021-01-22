@@ -25,6 +25,7 @@ export class ProjectComponent implements OnInit {
        this.id = params['id'];
        this.getProject(this.id).subscribe((pro) => {
         this.project = pro;
+        this.project.id = this.id;
        });
     });
   }
@@ -49,6 +50,7 @@ export class ProjectComponent implements OnInit {
 
     const flights = [...this.project.flights || [], flight];
 
+    this.project.id = this.id;
     this.project.flights = flights;
     this.patchProject(this.project).subscribe(console.log);
   }
