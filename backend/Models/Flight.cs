@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 
 namespace backend.Models
 {
-    public class Project
+    public class Flight
     {
         public string Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-
-        public List<Flight> Flights { get; set; }
+        public string FlightNr { get; set; }
+        public string Data { get; set; }
     }
 }

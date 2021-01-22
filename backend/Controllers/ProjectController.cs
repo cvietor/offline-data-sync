@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ProjectController : ControllerBase
     {
         private const string BaseUrl = "https://offline-data-sync-db-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -40,16 +40,29 @@ namespace backend.Controllers
             })).ToList();
         }
 
-        [HttpPost]
-        public async Task<string> Post(Project project)
+        [HttpGet("{id}")]
+        public async Task<Project> GetById(string id)
         {
             var firebaseClient = new FirebaseClient(BaseUrl);
 
             var result = await firebaseClient
                 .Child("Projects")
+                .Child(id)
+                .OnceSingleAsync<Project>();
+
+            return result;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<string>> Post(Project project)
+        {
+            var firebaseClient = new FirebaseClient(BaseUrl);
+            
+            var result = await firebaseClient
+                .Child("Projects")
                 .PostAsync<Project>(project);
 
-            return result.Key;
+            return Ok(result);
         }
 
         [HttpPatch]

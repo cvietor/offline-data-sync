@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,6 +8,19 @@ import { Component } from '@angular/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  selectedUser = null;
+
+  users = [{
+    id: 1,
+    name: "Chris Vietor"
+  },{
+    id: 2,
+    name: "Kai Gerken"
+  }];
+
+  constructor(private userService: UserService) {
+    this.selectedUser = this.userService.getSelectedUser() || this.users[0];
+  }
 
   collapse() {
     this.isExpanded = false;
@@ -14,5 +28,9 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  selectUser(user) {
+    this.userService.selectUser(user);
   }
 }

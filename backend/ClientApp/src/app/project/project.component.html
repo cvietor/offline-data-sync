@@ -1,0 +1,23 @@
+<div *ngIf="project">
+  Name: <input [(ngModel)]="project.name" style="width: 400px">
+  <br />
+  Description: <input [(ngModel)]="project.description" style="width: 800px">
+
+  <br />
+  <button (click)="updateProject(project)">Save</button>
+
+  <br />  <br />
+  Flights:
+
+  <li *ngFor="let flight of project.flights" class="list-group-item">
+    <div class="row">
+
+      <div class="col-10">
+        {{ flight.flightNr }}
+      </div>
+    </div>
+  </li>
+
+  <button (click)="addFlight()">Add flight</button>
+  <br />
+</div>
